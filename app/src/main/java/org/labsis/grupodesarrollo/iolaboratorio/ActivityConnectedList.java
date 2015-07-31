@@ -1,5 +1,7 @@
 package org.labsis.grupodesarrollo.iolaboratorio;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,17 +9,20 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.labsis.grupodesarrollo.iolaboratorio.Adapter.ConnectedListAdapter;
+import org.labsis.grupodesarrollo.iolaboratorio.Util.OperacionesComunes;
 
 
 public class ActivityConnectedList extends ActionBarActivity {
 
     private ListView lsV_connected_list;
     private ConnectedListAdapter mAdapter;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connected_list);
+        mContext = this;
         inflateLayout();
         loadData();
 
@@ -33,5 +38,22 @@ public class ActivityConnectedList extends ActionBarActivity {
 
     public void loadData(){
 
+        if(OperacionesComunes.isConnectivityAvailable(mContext)){
+            CargarAdapterAsyncTask cargarAdapter = new CargarAdapterAsyncTask();
+            cargarAdapter.execute();
+        }
+
+    }
+
+
+    private class CargarAdapterAsyncTask extends AsyncTask<Void,Void,Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+
+        
     }
 }
