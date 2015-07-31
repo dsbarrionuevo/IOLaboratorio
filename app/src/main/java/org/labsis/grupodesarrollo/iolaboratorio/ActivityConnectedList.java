@@ -54,6 +54,6 @@ public class ActivityConnectedList extends ActionBarActivity {
             return null;
         }
 
-        
+
     }
 }
