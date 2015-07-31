@@ -9,7 +9,7 @@ import android.widget.ListView;
 import org.labsis.grupodesarrollo.iolaboratorio.Adapter.ConnectedListAdapter;
 
 
-public class ConnectedListActivity extends ActionBarActivity {
+public class ActivityConnectedList extends ActionBarActivity {
 
     private ListView lsV_connected_list;
     private ConnectedListAdapter mAdapter;

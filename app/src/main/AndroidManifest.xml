@@ -28,7 +28,7 @@
 
 
         <activity
-            android:name=".ConnectedListActivity"
+            android:name=".ActivityConnectedList"
             android:label="@string/title_activity_connected_list" >
         </activity>
     </application>

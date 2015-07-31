@@ -5,4 +5,19 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+    <style name="fontTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="fontDeffault">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
+    </style>
+    <style name="fontSecondary">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/secondary_text_default_material_light</item>
+    </style>
+
 </resources>
