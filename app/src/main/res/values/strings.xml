@@ -4,6 +4,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="title_activity_connected_list">ConnectedListActivity</string>
+
     <!-- Activity Principal -->
     <string name="activity_principal_titulo">Principal</string>
 
@@ -12,5 +14,4 @@
     <string name="activity_inicio_btn_ingresar">Ingresar</string>
     <string name="activity_inicio_btn_registrarse">Registrarse</string>
 
-    <string name="title_activity_connected_list">ConnectedListActivity</string>
 </resources>
