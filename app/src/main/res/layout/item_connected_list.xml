@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -22,8 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Probando"
-        android:layout_alignRight="@id/txV_Descripcion_Nombre"
-        style="@style/fontDeffault"/>
+        style="@style/fontDeffault"
+        android:layout_alignBaseline="@+id/txV_Descripcion_Nombre"
+        android:layout_alignBottom="@+id/txV_Descripcion_Nombre"
+        android:layout_toRightOf="@+id/txV_Descripcion_Nombre"
+        android:layout_toEndOf="@+id/txV_Descripcion_Nombre" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -42,7 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Probando"
-            style="@style/fontDeffault"/>
+            style="@style/fontDeffault"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txV_Descripcion_fecha_ingreso"
+            android:layout_toEndOf="@+id/txV_Descripcion_fecha_ingreso" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -60,7 +64,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Probando"
-            style="@style/fontDeffault"/>
+            style="@style/fontDeffault"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txV_descripcion_fecha_egreso"
+            android:layout_toEndOf="@+id/txV_descripcion_fecha_egreso" />
     </RelativeLayout>
 
 </LinearLayout>

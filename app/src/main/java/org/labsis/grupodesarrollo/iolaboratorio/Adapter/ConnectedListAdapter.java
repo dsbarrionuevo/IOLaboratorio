@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import org.labsis.grupodesarrollo.iolaboratorio.R;
+import org.labsis.grupodesarrollo.iolaboratorio.entidades.Registro;
 
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  * Created by ignacio on 31/07/15.
  */
 public class ConnectedListAdapter extends BaseAdapter {
-    private ArrayList data;
+    private ArrayList<Registro> data;
     private Context mContext;
 
     @Override
@@ -33,26 +35,35 @@ public class ConnectedListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int pos, View view, ViewGroup viewGroup) {
         View rowView = view;
         connectedListHolder holder= null;
         if(rowView ==null){
             LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.activity_connected_list,viewGroup,false);
+            rowView = inflater.inflate(R.layout.item_connected_list,viewGroup,false);
             holder = new connectedListHolder();
+            holder.txV_nombre = (TextView) rowView.findViewById(R.id.txtNombre);
+            holder.txV_fecha_hora_ingreso = (TextView) rowView.findViewById(R.id.txV_fecha_ingreso);
+            holder.txV_fecha_hora_egreso= (TextView) rowView.findViewById(R.id.txV_fecha_egreso);
 
-
+        }else{
+            holder = (connectedListHolder) rowView.getTag();
         }
 
+        Registro reg = (Registro)getItem(pos);
+        holder.txV_nombre.setText(reg.getUsuario().getNombre());
+        holder.txV_fecha_hora_ingreso.setText(reg.getFecha_ingreso().toString());
+        holder.txV_fecha_hora_egreso.setText(reg.getFecha_egreso().toString());
+
         return rowView;
-                }
+    }
 
 
     public static class connectedListHolder{
 
-        public String nombre;
-        public String fecha_hora_ingreso;
-        public String fecha_hora_egreso;
+        public TextView txV_nombre;
+        public TextView txV_fecha_hora_ingreso;
+        public TextView txV_fecha_hora_egreso;
 
 
 
