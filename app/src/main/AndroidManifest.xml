@@ -17,6 +17,20 @@
         </activity>
 
         <activity
+            android:name=".ActivityRegistrarse"
+            android:label="@string/activity_principal_titulo">
+
+        </activity>
+
+        <activity
+            android:name=".ActivityIngresar"
+            android:label="@string/activity_principal_titulo">
+
+        </activity>
+
+
+
+        <activity
             android:name=".ActivityInicio"
             android:label="@string/activity_inicio_titulo">
             <intent-filter>
