@@ -12,17 +12,24 @@
         android:layout_marginRight="@dimen/activity_inicio_margin_horizontal_botones"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/txtNombre"
+            android:hint="@string/activity_ingresar_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/txtClave"
+            android:inputType="textPassword"
+            android:hint="@string/activity_ingresar_clave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/btnIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_inicio_btn_ingresar" />
-
-        <Button
-            android:id="@+id/btnRegistrarse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_inicio_btn_registrarse" />
+            android:text="@string/activity_ingresar_btn_ingresar" />
 
     </LinearLayout>
 
