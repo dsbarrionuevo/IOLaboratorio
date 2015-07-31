@@ -1,11 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ActivityPrincipal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_inicio_margin_horizontal_botones"
+        android:layout_marginRight="@dimen/activity_inicio_margin_horizontal_botones"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnIngresarSalir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_principal_btn_ingresar" />
+
+    </LinearLayout>
 
 </RelativeLayout>

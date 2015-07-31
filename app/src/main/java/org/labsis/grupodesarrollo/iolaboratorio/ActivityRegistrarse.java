@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
+import org.labsis.grupodesarrollo.iolaboratorio.util.Cliente;
 
 /**
  * Created by Diego on 31/07/2015.
@@ -32,7 +36,30 @@ public class ActivityRegistrarse extends Activity {
                 //o "usuario ya exsite", por lo que debo probar con otro nombre de usuario
                 String nombre = txtNombre.getText().toString();
                 String clave = txtClave.getText().toString();
+                final Usuario usuarioNuevo = new Usuario(nombre, clave);
                 //correr llamada al servidor en asyntask...
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Cliente.getInstancia().registrarUsuario(usuarioNuevo)) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ActivityRegistrarse.this, "Éxito al registrar usuario", Toast.LENGTH_SHORT).show();
+                                    ;
+                                }
+                            });
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ActivityRegistrarse.this, "Problemas al registrar usuario", Toast.LENGTH_SHORT).show();
+                                    ;
+                                }
+                            });
+                        }
+                    }
+                }).start();
             }
         });
 
