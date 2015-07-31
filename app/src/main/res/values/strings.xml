@@ -21,4 +21,16 @@
 
 
 
+    <!-- Activity Registrarse -->
+    <string name="activity_registrarse_nombre">Nombre de usuario</string>
+    <string name="activity_registrarse_clave">Clave</string>
+    <string name="activity_registrarse_btn_registrarse">Registrarse</string>
+
+    <!-- Activity Ingresar -->
+    <string name="activity_ingresar_nombre">Nombre de usuario</string>
+    <string name="activity_ingresar_clave">Clave</string>
+    <string name="activity_ingresar_btn_ingresar">Ingresar</string>
+
+
+
 </resources>
