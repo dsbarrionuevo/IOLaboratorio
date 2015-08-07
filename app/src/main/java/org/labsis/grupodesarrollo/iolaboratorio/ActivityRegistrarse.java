@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
-import org.labsis.grupodesarrollo.iolaboratorio.util.Cliente;
+import org.labsis.grupodesarrollo.iolaboratorio.Util.Cliente;
 
 /**
  * Created by Diego on 31/07/2015.
@@ -45,7 +45,7 @@ public class ActivityRegistrarse extends Activity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(ActivityRegistrarse.this, "Éxito al registrar usuario", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ActivityRegistrarse.this, "ï¿½xito al registrar usuario", Toast.LENGTH_SHORT).show();
                                     ;
                                 }
                             });

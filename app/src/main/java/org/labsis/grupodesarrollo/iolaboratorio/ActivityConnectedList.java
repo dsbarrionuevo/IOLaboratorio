@@ -9,7 +9,12 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import org.labsis.grupodesarrollo.iolaboratorio.Adapter.ConnectedListAdapter;
+import org.labsis.grupodesarrollo.iolaboratorio.Util.Cliente;
 import org.labsis.grupodesarrollo.iolaboratorio.Util.OperacionesComunes;
+import org.labsis.grupodesarrollo.iolaboratorio.entidades.Registro;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class ActivityConnectedList extends ActionBarActivity {
@@ -33,7 +38,7 @@ public class ActivityConnectedList extends ActionBarActivity {
     public void inflateLayout(){
 
         lsV_connected_list = (ListView) findViewById(R.id.lsV_connected_list);
-        lsV_connected_list.setAdapter(mAdapter);
+
     }
 
     public void loadData(){
@@ -46,14 +51,22 @@ public class ActivityConnectedList extends ActionBarActivity {
     }
 
 
-    private class CargarAdapterAsyncTask extends AsyncTask<Void,Void,Void> {
+    private class CargarAdapterAsyncTask extends AsyncTask<Void,Void,LinkedList<Registro>> {
 
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            return null;
+        protected LinkedList<Registro> doInBackground(Void... voids) {
+            LinkedList<Registro> reg =Cliente.getInstancia().consultarUsuariosRegistrados();
+
+                return reg;
+            }
+
+        @Override
+        protected void onPostExecute(LinkedList<Registro> reg){
+            ConnectedListAdapter mAdapter = new ConnectedListAdapter(mContext,reg);
+            lsV_connected_list.setAdapter(mAdapter);
+
         }
-
-
     }
+
 }

@@ -16,7 +16,14 @@
             android:id="@+id/btnIngresarSalir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_principal_btn_ingresar" />
+            android:text="@string/activity_ingresar_btn_ingresar" />
+
+        <Button
+            android:id="@+id/btnConsultarListadoConectados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_principal_btn_consultar_listado" />
+
 
     </LinearLayout>
 

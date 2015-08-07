@@ -10,15 +10,22 @@ import android.widget.TextView;
 import org.labsis.grupodesarrollo.iolaboratorio.R;
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Registro;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by ignacio on 31/07/15.
  */
 public class ConnectedListAdapter extends BaseAdapter {
-    private ArrayList<Registro> data;
+    private LinkedList<Registro> data;
     private Context mContext;
 
+
+    public ConnectedListAdapter(Context context, LinkedList<Registro> reg){
+        super();
+        mContext=context;
+        data=reg;
+
+    }
     @Override
     public int getCount() {
         return data.size();

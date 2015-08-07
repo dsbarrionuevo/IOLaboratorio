@@ -9,6 +9,7 @@
     <!-- Activity Principal -->
     <string name="activity_principal_titulo">Principal</string>
     <string name="activity_principal_btn_ingresar">Ingresar</string>
+    <string name="activity_principal_btn_consultar_listado">Consultar usuarios registrados</string>
     <string name="activity_principal_btn_salir">Salir</string>
 
     <!-- Activity Inicio -->

@@ -1,9 +1,12 @@
-package org.labsis.grupodesarrollo.iolaboratorio.util;
+package org.labsis.grupodesarrollo.iolaboratorio.Util;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.labsis.grupodesarrollo.iolaboratorio.R;
+import org.labsis.grupodesarrollo.iolaboratorio.entidades.Registro;
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
 
 import java.io.BufferedReader;
@@ -12,13 +15,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.LinkedList;
 
 /**
  * Created by Diego on 31/07/2015.
  */
 public class Cliente {
 
-    private static final String HOST_SERVIDOR = "http://172.16.170.18//io_laboratorio/";
+        private static final String HOST_SERVIDOR = "http://172.16.170.56/apiLoginLabis/";
 
     private static Cliente yo;
 
@@ -59,5 +63,48 @@ public class Cliente {
         }
         return response.toString();
     }
+
+    public boolean iniciarSesion(Usuario usuario) {
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/iniciar_sesion.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
+            JSONObject respuestaJson = new JSONObject(respuesta);
+            return true;
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return false;
+    }
+
+    public String registarIngreso(Usuario usuario,Context mContext) {
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/registrar_movimiento.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
+            JSONObject respuestaJson = new JSONObject(respuesta);
+            return "Registrada llegada correctamente";
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return "";
+    }
+
+
+    public LinkedList<Registro> consultarUsuariosRegistrados() {
+        LinkedList<Registro> list = new LinkedList<Registro>();
+
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/consultar_movimientos.php");
+            JSONObject respuestaJson = new JSONObject(respuesta);
+
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return list;
+    }
+
 
 }
