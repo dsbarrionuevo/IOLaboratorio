@@ -17,9 +17,9 @@
     <string name="activity_inicio_btn_ingresar">Ingresar</string>
     <string name="activity_inicio_btn_registrarse">Registrarse</string>
 
-    <string name="nombre">Nombre</string>
-    <string name="fecha_ingreso">Fecha de Ingreso</string>
-    <string name="fecha_egreso">Fecha de Egreso</string>
+    <string name="nombre">Nombre: </string>
+    <string name="fecha_ingreso">Fecha de Ingreso: </string>
+    <string name="fecha_egreso">Fecha de Egreso: </string>
 
     <!-- Activity Registrarse -->
     <string name="activity_registrarse_nombre">Nombre de usuario</string>

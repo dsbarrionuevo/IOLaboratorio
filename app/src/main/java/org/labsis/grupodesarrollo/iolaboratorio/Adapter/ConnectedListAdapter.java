@@ -1,6 +1,7 @@
 package org.labsis.grupodesarrollo.iolaboratorio.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ public class ConnectedListAdapter extends BaseAdapter {
 
 
     public ConnectedListAdapter(Context context, LinkedList<Registro> reg){
-        super();
         mContext=context;
         data=reg;
 
@@ -49,18 +49,25 @@ public class ConnectedListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.item_connected_list,viewGroup,false);
             holder = new connectedListHolder();
-            holder.txV_nombre = (TextView) rowView.findViewById(R.id.txtNombre);
+            holder.txV_nombre = (TextView) rowView.findViewById(R.id.txV_nombre);
             holder.txV_fecha_hora_ingreso = (TextView) rowView.findViewById(R.id.txV_fecha_ingreso);
             holder.txV_fecha_hora_egreso= (TextView) rowView.findViewById(R.id.txV_fecha_egreso);
+            rowView.setTag(holder);
+
 
         }else{
             holder = (connectedListHolder) rowView.getTag();
         }
 
         Registro reg = (Registro)getItem(pos);
+        String nombre = reg.getUsuario().getNombre();
         holder.txV_nombre.setText(reg.getUsuario().getNombre());
-        holder.txV_fecha_hora_ingreso.setText(reg.getFecha_ingreso().toString());
-        holder.txV_fecha_hora_egreso.setText(reg.getFecha_egreso().toString());
+        holder.txV_fecha_hora_ingreso.setText(reg.getFecha_ingreso());
+        holder.txV_fecha_hora_egreso.setText(reg.getFecha_egreso());
+
+        if(reg.getFecha_egreso()!="null"){
+            holder.txV_nombre.setTextColor(Color.RED);
+        }
 
         return rowView;
     }

@@ -9,6 +9,10 @@ public class Usuario {
     private String nombre;
     private String clave;
 
+
+    public Usuario (){
+
+    }
     public Usuario(int id, String nombre, String clave) {
         this.id = id;
         this.nombre = nombre;

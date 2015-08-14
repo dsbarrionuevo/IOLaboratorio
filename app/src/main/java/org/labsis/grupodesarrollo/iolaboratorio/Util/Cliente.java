@@ -3,6 +3,7 @@ package org.labsis.grupodesarrollo.iolaboratorio.Util;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.labsis.grupodesarrollo.iolaboratorio.R;
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -22,7 +24,7 @@ import java.util.LinkedList;
  */
 public class Cliente {
 
-        private static final String HOST_SERVIDOR = "http://172.16.170.56/apiLoginLabis/";
+        private static final String HOST_SERVIDOR = "http://172.16.170.82/apiLoginLabis/";
 
     private static Cliente yo;
 
@@ -97,6 +99,23 @@ public class Cliente {
         try {
             String respuesta = request(HOST_SERVIDOR + "/consultar_movimientos.php");
             JSONObject respuestaJson = new JSONObject(respuesta);
+            Log.i(Cliente.class.getCanonicalName(), respuestaJson.getString("mensaje"));
+            JSONArray arrayJson= respuestaJson.getJSONArray("mensaje");
+
+            for(int i = 0;i<arrayJson.length();i++){
+                JSONObject json = arrayJson.getJSONObject(i);
+                Registro r = new Registro();
+                Usuario u  = new Usuario();
+                u.setNombre(json.getString("nombre"));
+                r.setUsuario(u);
+                r.setFecha_ingreso(json.getString("fecha_hora_ingreso"));
+                r.setFecha_egreso(json.getString("fecha_hora_egreso"));
+
+                list.add(r);
+        }
+
+
+
 
         } catch (IOException e) {
             Log.e(Cliente.class.getCanonicalName(), e.getMessage());
