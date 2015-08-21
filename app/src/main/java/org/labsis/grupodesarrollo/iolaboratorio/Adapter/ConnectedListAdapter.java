@@ -65,9 +65,6 @@ public class ConnectedListAdapter extends BaseAdapter {
         holder.txV_fecha_hora_ingreso.setText(reg.getFecha_ingreso());
         holder.txV_fecha_hora_egreso.setText(reg.getFecha_egreso());
 
-        if(reg.getFecha_egreso()!="null"){
-            holder.txV_nombre.setTextColor(Color.RED);
-        }
 
         return rowView;
     }
