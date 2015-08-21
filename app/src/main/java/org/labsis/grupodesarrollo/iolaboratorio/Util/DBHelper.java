@@ -1,4 +1,4 @@
-package org.labsis.grupodesarrollo.iolaboratorio.util;
+package org.labsis.grupodesarrollo.iolaboratorio.Util;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -38,13 +38,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREACION);
     }
 
-    public void insertarUsuario(Usuario usuario) {
+    public boolean insertarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id", 1);//siempre tengo un unico usuario en la tabla, con id = 1
         cv.put("nombre", usuario.getNombre());
         cv.put("clave", usuario.getClave());
-        db.insert("usuario", null, cv);
+        return db.insert("usuario", null, cv) != -1;
     }
 
     public Usuario consultarUsuario() {

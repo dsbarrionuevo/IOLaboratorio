@@ -2,7 +2,6 @@ package org.labsis.grupodesarrollo.iolaboratorio;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.labsis.grupodesarrollo.iolaboratorio.Util.Cliente;
+import org.labsis.grupodesarrollo.iolaboratorio.Util.DBHelper;
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
 
 /**
@@ -39,40 +39,35 @@ public class ActivityIngresar extends Activity {
                 String nombre = txtNombre.getText().toString();
                 String clave = txtClave.getText().toString();
                 //correr llamada al servidor en asyntask...
-                if(nombre!= "" && clave!="")login(nombre, clave);
+                if (nombre != "" && clave != "") login(nombre, clave);
             }
         });
     }
 
-        protected void login(String nombre,String clave){
-            Usuario usr = new Usuario(nombre,clave);
-            IngresarSesionAsyncTask login = new IngresarSesionAsyncTask();
-            login.execute(usr);
-    }
-
-
-        private class IngresarSesionAsyncTask extends AsyncTask<Usuario,Void,Boolean> {
-
+    protected void login(String nombre, String clave) {
+        final Usuario usuario = new Usuario(nombre, clave);
+        new Thread(new Runnable() {
             @Override
-            protected Boolean doInBackground(Usuario... params) {
-                Usuario u = params[0];
-                return(Cliente.getInstancia().iniciarSesion(u));
-            }
-
-
-            protected void onPostExecute(Boolean result) {
-                result=true;
-
-                if(result){
-                    Intent i = new Intent(ActivityIngresar.this,ActivityPrincipal.class);
-                    startActivity(i);
-                }else{
-                    Toast.makeText(ActivityIngresar.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+            public void run() {
+                if (Cliente.getInstancia().iniciarSesion(usuario)) {
+                    DBHelper db = new DBHelper(ActivityIngresar.this);
+                    db.insertarUsuario(usuario);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(ActivityIngresar.this, ActivityPrincipal.class));
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ActivityIngresar.this, "Usuario o contraseña incorrecta", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-
             }
-
-        }
-
+        }).start();
+    }
 
 }

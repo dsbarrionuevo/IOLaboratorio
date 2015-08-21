@@ -6,7 +6,6 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.labsis.grupodesarrollo.iolaboratorio.R;
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Registro;
 import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
 
@@ -16,7 +15,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -70,7 +68,7 @@ public class Cliente {
         try {
             String respuesta = request(HOST_SERVIDOR + "/iniciar_sesion.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
             JSONObject respuestaJson = new JSONObject(respuesta);
-            return true;
+            return (respuestaJson.getString("estado").equalsIgnoreCase("ok"));
         } catch (IOException e) {
             Log.e(Cliente.class.getCanonicalName(), e.getMessage());
         } catch (JSONException e) {
