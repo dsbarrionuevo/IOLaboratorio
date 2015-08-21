@@ -112,11 +112,7 @@ public class Cliente {
                 r.setFecha_egreso(json.getString("fecha_hora_egreso"));
 
                 list.add(r);
-        }
-
-
-
-
+            }
         } catch (IOException e) {
             Log.e(Cliente.class.getCanonicalName(), e.getMessage());
         } catch (JSONException e) {
