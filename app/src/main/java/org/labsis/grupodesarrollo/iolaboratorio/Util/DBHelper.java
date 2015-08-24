@@ -41,7 +41,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean insertarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("id", 1);//siempre tengo un unico usuario en la tabla, con id = 1
+        if(usuario.getId()!= -1) {
+            cv.put("id", usuario.getId());
+        }
         cv.put("nombre", usuario.getNombre());
         cv.put("clave", usuario.getClave());
         return db.insert("usuario", null, cv) != -1;

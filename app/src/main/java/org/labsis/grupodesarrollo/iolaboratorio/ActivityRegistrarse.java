@@ -45,7 +45,9 @@ public class ActivityRegistrarse extends Activity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        if (Cliente.getInstancia().registrarUsuario(usuarioNuevo)) {
+                        int idUsuario = Cliente.getInstancia().registrarUsuario(usuarioNuevo);
+                        if (idUsuario != -1) {
+                            usuarioNuevo.setId(idUsuario);
                             db.insertarUsuario(usuarioNuevo);
                             runOnUiThread(new Runnable() {
                                 @Override

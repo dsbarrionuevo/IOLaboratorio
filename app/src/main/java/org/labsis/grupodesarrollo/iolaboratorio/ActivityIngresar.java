@@ -49,8 +49,10 @@ public class ActivityIngresar extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (Cliente.getInstancia().iniciarSesion(usuario)) {
+                int idUsuario = Cliente.getInstancia().iniciarSesion(usuario);
+                if (idUsuario != -1) {
                     DBHelper db = new DBHelper(ActivityIngresar.this);
+                    usuario.setId(idUsuario);
                     db.insertarUsuario(usuario);
                     runOnUiThread(new Runnable() {
                         @Override

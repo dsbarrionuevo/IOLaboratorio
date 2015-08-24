@@ -1,6 +1,5 @@
 package org.labsis.grupodesarrollo.iolaboratorio.Util;
 
-import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -22,7 +21,7 @@ import java.util.LinkedList;
  */
 public class Cliente {
 
-        private static final String HOST_SERVIDOR = "http://172.16.170.82/apiLoginLabis/";
+    private static final String HOST_SERVIDOR = "http://172.16.80.88/io_laboratorio_server/";
 
     private static Cliente yo;
 
@@ -33,17 +32,77 @@ public class Cliente {
         return yo;
     }
 
-    public boolean registrarUsuario(Usuario usuario) {
+    public int registrarUsuario(Usuario usuario) {
         try {
             String respuesta = request(HOST_SERVIDOR + "/registrar_usuario.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
             JSONObject respuestaJson = new JSONObject(respuesta);
-            return true;
+            if (respuestaJson.getString("estado").equalsIgnoreCase("ok")) {
+                int idUsuarioRegistrado = respuestaJson.getInt("datos");
+                return idUsuarioRegistrado;
+            }
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return -1;
+    }
+
+    public int iniciarSesion(Usuario usuario) {
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/iniciar_sesion.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
+            JSONObject respuestaJson = new JSONObject(respuesta);
+            if(respuestaJson.getString("estado").equalsIgnoreCase("ok")){
+                JSONObject datosJson = respuestaJson.getJSONObject("datos");
+                int idUsuario = datosJson.getInt("id");
+                return idUsuario;
+            }
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return -1;
+    }
+
+    public boolean registarIngreso(Usuario usuario) {
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/registrar_movimiento.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
+            JSONObject respuestaJson = new JSONObject(respuesta);
+            return respuestaJson.getString("estado").equalsIgnoreCase("ok");
         } catch (IOException e) {
             Log.e(Cliente.class.getCanonicalName(), e.getMessage());
         } catch (JSONException e) {
             Log.e(Cliente.class.getCanonicalName(), e.getMessage());
         }
         return false;
+    }
+
+    public LinkedList<Registro> consultarUsuariosRegistrados() {
+        LinkedList<Registro> list = new LinkedList<Registro>();
+        try {
+            String respuesta = request(HOST_SERVIDOR + "/consultar_movimientos.php");
+            JSONObject respuestaJson = new JSONObject(respuesta);
+            Log.i(Cliente.class.getCanonicalName(), respuestaJson.getString("mensaje"));
+            JSONArray arrayJson = respuestaJson.getJSONArray("mensaje");
+
+            for (int i = 0; i < arrayJson.length(); i++) {
+                JSONObject json = arrayJson.getJSONObject(i);
+                Registro r = new Registro();
+                Usuario u = new Usuario();
+                u.setNombre(json.getString("nombre"));
+                r.setUsuario(u);
+                r.setFecha_ingreso(json.getString("fecha_hora_ingreso"));
+                r.setFecha_egreso(json.getString("fecha_hora_egreso"));
+
+                list.add(r);
+            }
+        } catch (IOException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
+        }
+        return list;
     }
 
     //fuente: http://stackoverflow.com/questions/29294479/android-deprecated-apache-module-httpclient-httpresponse-etc
@@ -63,61 +122,4 @@ public class Cliente {
         }
         return response.toString();
     }
-
-    public boolean iniciarSesion(Usuario usuario) {
-        try {
-            String respuesta = request(HOST_SERVIDOR + "/iniciar_sesion.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
-            JSONObject respuestaJson = new JSONObject(respuesta);
-            return (respuestaJson.getString("estado").equalsIgnoreCase("ok"));
-        } catch (IOException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        } catch (JSONException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        }
-        return false;
-    }
-
-    public String registarIngreso(Usuario usuario,Context mContext) {
-        try {
-            String respuesta = request(HOST_SERVIDOR + "/registrar_movimiento.php?usuario=" + usuario.getNombre() + "&clave=" + usuario.getClave());
-            JSONObject respuestaJson = new JSONObject(respuesta);
-            return "Registrada llegada correctamente";
-        } catch (IOException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        } catch (JSONException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        }
-        return "";
-    }
-
-
-    public LinkedList<Registro> consultarUsuariosRegistrados() {
-        LinkedList<Registro> list = new LinkedList<Registro>();
-
-        try {
-            String respuesta = request(HOST_SERVIDOR + "/consultar_movimientos.php");
-            JSONObject respuestaJson = new JSONObject(respuesta);
-            Log.i(Cliente.class.getCanonicalName(), respuestaJson.getString("mensaje"));
-            JSONArray arrayJson= respuestaJson.getJSONArray("mensaje");
-
-            for(int i = 0;i<arrayJson.length();i++){
-                JSONObject json = arrayJson.getJSONObject(i);
-                Registro r = new Registro();
-                Usuario u  = new Usuario();
-                u.setNombre(json.getString("nombre"));
-                r.setUsuario(u);
-                r.setFecha_ingreso(json.getString("fecha_hora_ingreso"));
-                r.setFecha_egreso(json.getString("fecha_hora_egreso"));
-
-                list.add(r);
-            }
-        } catch (IOException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        } catch (JSONException e) {
-            Log.e(Cliente.class.getCanonicalName(), e.getMessage());
-        }
-        return list;
-    }
-
-
 }

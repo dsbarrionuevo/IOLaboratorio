@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.labsis.grupodesarrollo.iolaboratorio.Util.DBHelper;
+import org.labsis.grupodesarrollo.iolaboratorio.entidades.Usuario;
+
 /**
  * Created by Diego on 31/07/2015.
  */
@@ -39,6 +42,13 @@ public class ActivityInicio extends Activity {
                 startActivity(intent);
             }
         });
+
+        //verifico si existe un usuario en la base de datos local
+        DBHelper db = new DBHelper(this);
+        Usuario usuario = db.consultarUsuario();
+        if (usuario != null) {
+            startActivity(new Intent(ActivityInicio.this, ActivityPrincipal.class));
+        }
     }
 
 }
