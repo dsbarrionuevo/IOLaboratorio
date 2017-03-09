@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/txV_Descripcion_Nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/nombre"
+        style="@style/fontTitle"/>
+
+    <TextView
+        android:id="@+id/txV_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="Probando"
+        style="@style/fontDeffault"
+        android:layout_alignBaseline="@+id/txV_Descripcion_Nombre"
+        android:layout_alignBottom="@+id/txV_Descripcion_Nombre"
+        android:layout_toRightOf="@+id/txV_Descripcion_Nombre"
+        android:layout_toEndOf="@+id/txV_Descripcion_Nombre" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txV_Descripcion_fecha_ingreso"
+            android:layout_width="wrap_content"
+            android:layout_height="30sp"
+            android:text="@string/fecha_ingreso"
+            style="@style/fontTitle"/>
+
+        <TextView
+            android:id="@+id/txV_fecha_ingreso"
+            android:layout_width="wrap_content"
+            android:layout_height="30sp"
+            android:text="Probando"
+            style="@style/fontDeffault"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txV_Descripcion_fecha_ingreso"
+            android:layout_toEndOf="@+id/txV_Descripcion_fecha_ingreso" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txV_descripcion_fecha_egreso"
+            android:layout_width="wrap_content"
+            android:layout_height="30sp"
+            android:text="@string/fecha_egreso"
+            style="@style/fontTitle"/>
+
+        <TextView
+            android:id="@+id/txV_fecha_egreso"
+            android:layout_width="wrap_content"
+            android:layout_height="30sp"
+            android:text="Probando"
+            style="@style/fontDeffault"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txV_descripcion_fecha_egreso"
+            android:layout_toEndOf="@+id/txV_descripcion_fecha_egreso" />
+    </RelativeLayout>
+
+</LinearLayout>
